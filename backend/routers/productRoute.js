@@ -12,4 +12,4 @@ router.post("/products/create", addProduct);
 router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 
-module.exports = router();
+module.exports = router;
