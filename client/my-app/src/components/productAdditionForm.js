@@ -12,15 +12,15 @@ function Form({ readProducts }) {
     function handleInputChange(e) {
         const value = e.target.value;
         setProduct({
-          ...product, [e.target.title]: value,
+          ...product, [e.target.name]: value,
         });
     }
 
     const addProduct = (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
             axios
-            .post()
+            .post("http://localhost:8080/products/create", product)
             .then(() => {
                 readProducts();
             })
@@ -50,7 +50,7 @@ function Form({ readProducts }) {
     </form>
     </div>
     </div>
-    )
+    );
   } 
 
   export default Form;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
 import Form from "./components/productAdditionForm";
+import Product from "./components/product.js";
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
   return (
     <div>
       <div><Form readProducts={readProducts}/></div>
-      {/* <div><Product products={products} readProducts={readProducts}/></div> */}
+      <div><Product products={products} readProducts={readProducts}/></div>
     </div>
   );
 }

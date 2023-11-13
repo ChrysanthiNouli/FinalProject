@@ -18,7 +18,7 @@ function Product({readProducts, products}) {
 
     async function addProduct() {
         try {
-            await axios.post("http://localhost:8000/products/", newProduct);
+            await axios.post("http://localhost:8000/products/create", newProduct);
             setNewProduct({
                 title:"",
                 description:"",
@@ -33,7 +33,7 @@ function Product({readProducts, products}) {
 
     async function updateProduct() {
         try {
-            await axios.put(`http://localhost:8000/products/${setEditProduct.id}`, {
+            await axios.put(`http://localhost:8080/${setEditProduct.id}`, {
                 title: editProduct.title,
                 description: editProduct.description,
                 image: editProduct.image,
@@ -51,13 +51,22 @@ function Product({readProducts, products}) {
         }
     }
 
-    async function deleteProduct() {
+    async function deleteProduct(id) {
+      if (window.confirm("Do you want to delete this product?")) {
         try {
-            await axios.delete(`http://localhost:8000/products/${id}`);
+            await axios
+            .delete(`http://localhost:8080/${id}`)
+            .then(() => {
+              alert("Product deleted.");
+              readProducts();
+            })
         } catch(err) {
             console.log("Cannot delete product, ", err);
         }
+    } else {
+      return;
     }
+  }
 
     return (
         <div>
@@ -77,7 +86,7 @@ function Product({readProducts, products}) {
                  </div>
                </div>
      
-               {/* Render the text as editable input if currently being edited */}
+               
                {editProduct.id === product._id && (
                  <div>
                    <input
