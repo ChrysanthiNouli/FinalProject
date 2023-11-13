@@ -18,22 +18,24 @@ function Product({readProducts, products}) {
 
     async function addProduct() {
         try {
-            await axios.post("http://localhost:8000/products/create", newProduct);
+            await axios
+            .post("http://localhost:8000/products/create", newProduct);
             setNewProduct({
                 title:"",
                 description:"",
                 image:"",
                 status:"",
             })
-            readProducts();
+            .then(() => readProducts());
         } catch(err) {
             console.log("Cannot add product, ", err);
         }
     }
 
-    async function updateProduct() {
+    async function updateProduct(id) {
         try {
-            await axios.put(`http://localhost:8080/${setEditProduct.id}`, {
+            await axios
+            .put(`http://localhost:8080/${editProduct.id}`, {
                 title: editProduct.title,
                 description: editProduct.description,
                 image: editProduct.image,
@@ -67,7 +69,6 @@ function Product({readProducts, products}) {
       return;
     }
   }
-
     return (
         <div>
             {products.map((product) => (
@@ -81,7 +82,7 @@ function Product({readProducts, products}) {
                  <button onClick={() => deleteProduct(product._id)}>Delete
                  </button>
                  <button
-                   onClick={() => setEditProduct()}>Edit
+                   onClick={() => setEditProduct({id: product._id})}>Edit
                  </button>
                  </div>
                </div>
