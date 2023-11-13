@@ -33,16 +33,16 @@ function Form({ readProducts }) {
     <div className="formContainer">
         <form className="form">
         <label> Title <br/>
-        <input type="text" name="title" onChange={handleInputChange} value={product.title} placeholder="Title"/>
+        <input type="text" name="title" onChange={handleInputChange} value={product.title} placeholder="Title"/><br/>
         </label>
         <label> Description<br/>
-        <input type="text" name="description" onChange={handleInputChange} value={product.description} placeholder="description"/>
+        <input type="text" name="description" onChange={handleInputChange} value={product.description} placeholder="description"/><br/>
         </label>
         <label> Image<br/>
-        <input type="text" name="image" onChange={handleInputChange} value={product.image} placeholder="image"/>
+        <input type="text" name="image" onChange={handleInputChange} value={product.image} placeholder="image"/><br/>
         </label>
         <label> Status<br/>
-        <input type="text" name="status" onChange={handleInputChange} value={product.status} placeholder="status"/>
+        <input type="text" name="status" onChange={handleInputChange} value={product.status} placeholder="status"/><br/><br/>
         </label>
         
         <button type="submit" onClick={(e) => {addProduct(e)}}>Submit</button>
