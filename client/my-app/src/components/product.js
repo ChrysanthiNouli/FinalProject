@@ -73,10 +73,10 @@ function Product({readProducts, products}) {
         <div>
             {products.map((product) => (
                <div key={product._id}>
-               <div>
-                 <span>{product.title}</span>
-                 <span>{product.description}</span>
-                 <span>{product.image}</span>
+               <div style={{backgroundColor: "lightblue", margin: "5px", width: "200px"}}>
+                 <span>{product.title}</span><br/>
+                 <span>{product.description}</span><br/>
+                 <span>{product.image}</span><br/>
                  <span>{product.status}</span>
                  <div>
                  <button onClick={() => deleteProduct(product._id)}>Delete
