@@ -7,6 +7,7 @@ function Product({readProducts, products}) {
         description:"",
         image:"",
         status:"",
+        category: "",
     })
 
     const [editProduct, setEditProduct] = useState({
@@ -14,8 +15,8 @@ function Product({readProducts, products}) {
         description:"",
         image:"",
         status:"",
+        category: "",
     })
-
 
     let handleCancel = () => {
       setEditProduct("");
@@ -30,6 +31,7 @@ function Product({readProducts, products}) {
                 description:"",
                 image:"",
                 status:"",
+                category: "",
             })
             .then(() => readProducts());
         } catch(err) {
@@ -45,6 +47,7 @@ function Product({readProducts, products}) {
                 description: editProduct.description,
                 image: editProduct.image,
                 status: editProduct.status,
+                category: editProduct.category,
             });
             setEditProduct({
                 id: id,
@@ -52,6 +55,7 @@ function Product({readProducts, products}) {
                 description:"",
                 image:"",
                 status:"",
+                category: "",
             })
             readProducts();
         } catch(err) {
@@ -83,7 +87,8 @@ function Product({readProducts, products}) {
                  <span>{product.title}</span><br/>
                  <span>{product.description}</span><br/>
                  <span>{product.image}</span><br/>
-                 <span>{product.status}</span>
+                 <span>{product.status}</span><br/>
+                 <span>{product.category}</span>
                  <div>
                  <button onClick={() => deleteProduct(product._id)}>Delete
                  </button>
@@ -125,6 +130,13 @@ function Product({readProducts, products}) {
                      value={product.status}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, status: e.target.value })
+                     }
+                   />
+                   <input
+                     type="text"
+                     value={product.category}
+                     onChange={(e) =>
+                       setEditProduct({ ...editProduct, category: e.target.value })
                      }
                    />
                    <button onClick={updateProduct}>Save</button>

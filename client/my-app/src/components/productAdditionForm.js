@@ -44,6 +44,9 @@ function Form({ readProducts }) {
         <label> Status<br/>
         <input type="text" name="status" onChange={handleInputChange} value={product.status} placeholder="status"/><br/>
         </label>
+        <label> Category<br/>
+        <input type="text" name="category" onChange={handleInputChange} value={product.category} placeholder="category"/><br/>
+        </label>
         
         <button type="submit" onClick={(e) => {addProduct(e)}}>Submit</button>
 

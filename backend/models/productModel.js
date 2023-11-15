@@ -12,6 +12,9 @@ const productSchema = new mongoose.Schema({
     },
     status: {
         type: String,
+    },
+    category: {
+        type: String,
     }
 })
 
