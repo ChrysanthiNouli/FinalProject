@@ -16,6 +16,7 @@ function Product({readProducts, products}) {
         status:"",
     })
 
+
     let handleCancel = () => {
       setEditProduct("");
     }
@@ -46,6 +47,7 @@ function Product({readProducts, products}) {
                 status: editProduct.status,
             });
             setEditProduct({
+                id: id,
                 title:"",
                 description:"",
                 image:"",
@@ -96,14 +98,14 @@ function Product({readProducts, products}) {
                  <div>
                    <input
                      type="text"
-                     value={editProduct.title}
+                     value={product.title}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, title: e.target.value })
                      }
                    />
                    <input
                      type="text"
-                     value={editProduct.description}
+                     value={product.description}
                      onChange={(e) =>
                        setEditProduct({
                          ...editProduct,
@@ -113,14 +115,14 @@ function Product({readProducts, products}) {
                    />
                    <input
                      type="text"
-                     value={editProduct.image}
+                     value={product.image}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, image: e.target.value })
                      }
                    />
                     <input
                      type="text"
-                     value={editProduct.status}
+                     value={product.status}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, status: e.target.value })
                      }
