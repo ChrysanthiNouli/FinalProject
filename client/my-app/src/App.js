@@ -32,10 +32,10 @@ function App() {
       <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route path="/form" element={<Form readProducts={readProducts}/>}>Product Form</Route>
+        <Route path="/products/create" element={<Form readProducts={readProducts}/>}>Product Form</Route>
         <Route path="/" element={<ProductList products={products} readProducts={readProducts}/>}>exCHANGE</Route>
-        <Route path="/login" element={<Login login={Login}/>}>Log In</Route>
-        <Route path="/register" element={<Register register={Register}/>}>Register</Route>
+        <Route path="/login" element={<Login Login={Login}/>}>Log In</Route>
+        <Route path="/register" element={<Register Register={Register}/>}>Register</Route>
       </Routes>
       </BrowserRouter>
     </div>

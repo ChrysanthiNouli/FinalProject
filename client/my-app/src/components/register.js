@@ -10,8 +10,7 @@ function Register() {
 
     async function handleRegister(e) {
         e.preventDefault();
-        let res = await axios
-        .post("http://localhost:8080/register", {fullName, email, password});
+        let res = await axios.post("http://localhost:8080/register", { fullName, email, password });
         alert(res.data.msg);
         navigate("/login");
     }

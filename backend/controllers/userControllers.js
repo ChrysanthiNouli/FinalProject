@@ -47,4 +47,9 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = {register, login};
+let validLogin = async(req, res) => {
+    let { fullName } = req.body;
+    res.send(`Welcome ${fullName}!`);
+};
+
+module.exports = { register, login, validLogin };
