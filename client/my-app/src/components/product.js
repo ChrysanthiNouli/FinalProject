@@ -10,11 +10,15 @@ function Product({readProducts, products}) {
     })
 
     const [editProduct, setEditProduct] = useState({
-        title:"",
+        title: "",
         description:"",
         image:"",
         status:"",
     })
+
+    let handleCancel = () => {
+      setEditProduct("");
+    }
 
     async function addProduct() {
         try {
@@ -122,6 +126,7 @@ function Product({readProducts, products}) {
                      }
                    />
                    <button onClick={updateProduct}>Save</button>
+                   <button onClick={handleCancel}>Cancel</button>
                  </div>
                )}
              </div> 
