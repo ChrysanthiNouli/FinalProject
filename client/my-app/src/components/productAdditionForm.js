@@ -2,11 +2,13 @@ import axios from "axios";
 import {useState} from "react";
 
 function Form({ readProducts }) {
+    let token = localStorage.getItem("token");
     const [product, setProduct] = useState({
         title:"",
         description:"",
         image:"",
         status:"",
+        category:"",
     });
         
     function handleInputChange(e) {
@@ -20,7 +22,7 @@ function Form({ readProducts }) {
         e.preventDefault();
         try {
             axios
-            .post("http://localhost:8080/products/create", product)
+            .post("http://localhost:8080/products/create", product, {headers:{Authorization:`Bearer ${token}`}})
             .then(() => {
                 readProducts();
             })

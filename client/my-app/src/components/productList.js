@@ -1,9 +1,9 @@
 import Product from "../components/product.js";
 
-function ProductList ({products}) {
+function ProductList ({products, readProducts}) {
     return (
         <div>
-            <Product products={products}/>
+            <Product products={products} readProducts={readProducts}/>
         </div>
     )
 }

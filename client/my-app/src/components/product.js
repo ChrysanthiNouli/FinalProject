@@ -1,13 +1,30 @@
 import axios from "axios";
-import {useState} from "react";
+import { useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
-function Product({readProducts, products}) {
+function Product({ products, readProducts}) {
+    const [productCreatorIds, setProductCreatorIds] = useState([]);
+    let token = localStorage.getItem("token");
+    let decoded = jwtDecode(token);
+
+    function filter (decoded) {
+      let productCreatorIds = products
+      .filter((product) => product.creator._id === decoded.id)
+      .map((product) => product._id);
+      setProductCreatorIds(productCreatorIds);
+    }
+
+    useEffect (() => {
+      filter();
+    }, [decoded.id]);
+
     const [newProduct, setNewProduct] = useState({
         title:"",
         description:"",
         image:"",
         status:"",
         category: "",
+        creator: "",
     })
 
     const [editProduct, setEditProduct] = useState({
@@ -32,6 +49,7 @@ function Product({readProducts, products}) {
                 image:"",
                 status:"",
                 category: "",
+                creator: "",
             })
             .then(() => readProducts());
         } catch(err) {
@@ -66,12 +84,10 @@ function Product({readProducts, products}) {
     async function deleteProduct(id) {
       if (window.confirm("Do you want to delete this product?")) {
         try {
-            await axios
-            .delete(`http://localhost:8080/${id}`)
-            .then(() => {
-              alert("Product deleted.");
-              readProducts();
-            })
+            let res = await axios
+            .delete(`http://localhost:8080/${id}`);
+            alert(res.data.msg);
+            readProducts();
         } catch(err) {
             console.log("Cannot delete product, ", err);
         }
@@ -89,12 +105,16 @@ function Product({readProducts, products}) {
                  <span>{product.image}</span><br/>
                  <span>{product.status}</span><br/>
                  <span>{product.category}</span>
+                 <span>{product.creator}</span>
                  <div>
-                 <button onClick={() => deleteProduct(product._id)}>Delete
-                 </button>
-                 <button
-                   onClick={() => setEditProduct({id: product._id})}>Edit
-                 </button>
+                  {token && productCreatorIds.includes(product._id) ? (  <>
+                  <button onClick={() => deleteProduct(product._id)}>Delete</button>
+                  <button onClick={() => setEditProduct({id: product._id})}>Edit</button>
+                    </>
+                  ) : (
+                    ""
+                  )}   
+                                 
                  </div>
                </div>
      
@@ -112,10 +132,7 @@ function Product({readProducts, products}) {
                      type="text"
                      value={product.description}
                      onChange={(e) =>
-                       setEditProduct({
-                         ...editProduct,
-                         description: e.target.value
-                       })
+                       setEditProduct({ ...editProduct, description: e.target.value })
                      }
                    />
                    <input

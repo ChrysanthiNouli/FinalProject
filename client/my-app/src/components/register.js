@@ -18,13 +18,13 @@ function Register() {
         <div>
             <form onSubmit={handleRegister}>
                 <h1>Register</h1>
-                <label>Full Name</label><br/>
-                <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)}/><br/>
-                <label>Email</label><br/>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
-                <label>Password</label><br/>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/><br/>
-                <input type="submit"/>
+                <label  htmlFor="Full Name">Full Name</label><br/>
+                <input type="text" id="Full Name" value={fullName} onChange={(e) => setFullName(e.target.value)}/><br/>
+                <label  htmlFor="email">Email</label><br/>
+                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
+                <label  htmlFor="password">Password</label><br/>
+                <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/><br/>
+                <input type="submit" value="Register"/>
             </form>
         </div>
     )

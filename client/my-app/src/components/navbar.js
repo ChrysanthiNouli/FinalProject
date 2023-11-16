@@ -39,7 +39,7 @@ function Navbar() {
                         <Link to="/menu">Menu </Link>
                         <Link to="/mail">Messages </Link>
                         <Link to="/">exCHANGE </Link>
-                        <Link to="/account">Account </Link>
+                        <Link to="/account">{decoded.fullName}</Link>
                         <Link to="/wishlist">Wishlist </Link>
                         <Link to="/cart">Cart </Link>
                         <Link onClick={handleLogout}>Log out</Link>
