@@ -5,13 +5,13 @@ import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 
 
 function Product({ products, readProducts }) {
-    const [productCreatorIds, setProductCreatorIds] = useState([]);
+    const [productCreatorIds, setProductCreatorIds] = useState([]); 
     let token = localStorage.getItem("token");
     let decoded;
     if (token) {
       decoded = jwtDecode(token);
     }
-
+    
     const filterUser = () => {
       try {
         let productCreatorIds = products
