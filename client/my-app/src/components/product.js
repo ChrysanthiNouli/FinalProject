@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
+
 
 function Product({ products, readProducts }) {
     const [productCreatorIds, setProductCreatorIds] = useState([]);
@@ -115,8 +117,9 @@ function Product({ products, readProducts }) {
                  {/* <span>{product.creator.username}</span> */}
                  <div>
                   {token && productCreatorIds.includes(product._id) ? (  <>
-                  <button onClick={() => deleteProduct(product._id)}>Delete</button>
-                  <button onClick={() => setEditProduct({id: product._id})}>Edit</button>
+                  <button onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
+                  <button onClick={() => setEditProduct({id: product._id})}><FaEdit />
+</button>
                     </>
                   ) : (
                     ""

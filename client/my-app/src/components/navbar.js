@@ -1,5 +1,6 @@
 import {Link, useNavigate} from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { FaBars, FaHeart, FaRegEnvelope, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 function Navbar() {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ function Navbar() {
             {!token ? ( 
                 <nav>
                     <div>
-                    <Link to="/menu">Menu </Link>
+                    <Link to="/menu"><FaBars /> </Link>
                     <Link to="/">exCHANGE </Link>
                     <Link to="/login">Login </Link>
                     <Link to="/register">Register</Link>
@@ -38,12 +39,12 @@ function Navbar() {
                 </nav> ) : (
                     <nav>
                         <div>
-                        <Link to="/menu">Menu </Link>
-                        <Link to="/mail">Messages </Link>
+                        <Link to="/menu"><FaBars /> </Link>
+                        <Link to="/mail"><FaRegEnvelope /></Link>
                         <Link to="/">exCHANGE </Link>
-                        <Link to="/account">{decoded.username}</Link>
-                        <Link to="/wishlist">Wishlist </Link>
-                        <Link to="/cart">Cart </Link>
+                        <Link to="/account"><FaUser />{decoded.username}</Link>
+                        <Link to="/wishlist"><FaHeart /></Link>
+                        <Link to="/cart"><FaShoppingCart /></Link>
                         <Link onClick={handleLogout}>Log out</Link>
                         </div>
                     </nav> 
