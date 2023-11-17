@@ -7,7 +7,7 @@ let verifyToken = (req, res, next) => {
         if (!receivedToken) {
             return res.status(403).send({msg: "Nonexistent token."});
         } else {
-            let verifiedToken = jwt.verify(receivedToken, process.env.PRIVATE_KEY);
+            let verifiedToken = jwt.verify(receivedToken, "authentication");
             if (!verifiedToken) {
                 return res.status(403).send({msg: "Unauthorized user."}); 
             } else {

@@ -2,21 +2,28 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
-function Product({ products, readProducts}) {
+function Product({ products, readProducts }) {
     const [productCreatorIds, setProductCreatorIds] = useState([]);
     let token = localStorage.getItem("token");
-    let decoded = jwtDecode(token);
-
-    function filter (decoded) {
-      let productCreatorIds = products
-      .filter((product) => product.creator._id === decoded.id)
-      .map((product) => product._id);
-      setProductCreatorIds(productCreatorIds);
+    let decoded;
+    if (token) {
+      decoded = jwtDecode(token);
     }
 
+    const filterUser = () => {
+      try {
+        let productCreatorIds = products
+        .filter((product) => product.creator._id === decoded.id)
+        .map((product) => product._id);
+        setProductCreatorIds(productCreatorIds);
+      } catch (err) {
+        console.log(err)
+      }
+    };
+
     useEffect (() => {
-      filter();
-    }, [decoded.id]);
+      filterUser();
+    }, [decoded]);
 
     const [newProduct, setNewProduct] = useState({
         title:"",
@@ -49,7 +56,7 @@ function Product({ products, readProducts}) {
                 image:"",
                 status:"",
                 category: "",
-                creator: "",
+                // creator: "",
             })
             .then(() => readProducts());
         } catch(err) {
@@ -105,7 +112,7 @@ function Product({ products, readProducts}) {
                  <span>{product.image}</span><br/>
                  <span>{product.status}</span><br/>
                  <span>{product.category}</span>
-                 <span>{product.creator}</span>
+                 {/* <span>{product.creator.username}</span> */}
                  <div>
                   {token && productCreatorIds.includes(product._id) ? (  <>
                   <button onClick={() => deleteProduct(product._id)}>Delete</button>

@@ -16,20 +16,21 @@ function Form({ readProducts }) {
         setProduct({
           ...product, [e.target.name]: value,
         });
-    }
+    };
 
     const addProduct = (e) => {
         e.preventDefault();
         try {
             axios
             .post("http://localhost:8080/products/create", product, {headers:{Authorization:`Bearer ${token}`}})
-            .then(() => {
+            .then((res) => {
+                alert(res.data.msg);
                 readProducts();
             })
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-    }
+    };
     return (
     <div>
     <div className="formContainer">

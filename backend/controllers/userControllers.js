@@ -5,19 +5,20 @@ const verifyToken = require("../middleware/auth.js");
 
 const register = async (req, res) => {
     try {
-        let {fullName, email, password} = req.body;
-        if (!fullName || !email || !password) {
+        let { username, email, password } = req.body;
+        if (!username || !email || !password) {
             return res.send({msg: "All fields are required"});
         } 
-            let found = await User.findOne({email, password});
+            let found = await User.findOne({ email });
             if (found) {
                 return res.send({msg: "Please register or log in with a new email."});
             }
-                let hashedPassword = await bcrypt.hash(password, process.env.SALT_ROUND);
-                await User.create({fullName, email, password: hashedPassword});
+                let hashedPassword = await bcrypt.hash(password, 10);
+                await User.create({ username, email, password: hashedPassword });
                 return res.send({msg: "Registered successfully."});
     } catch (err) {
-        res.status(500).send({msg: "Internal server error. Registration failed"})
+        console.log(err);
+        res.status(500).send({msg: "Internal server error. Registration failed"});
     }
 };
 
@@ -34,7 +35,7 @@ const login = async (req, res) => {
                 return res.status(401).send({msg: "Invalid email or password."});
             } else {
                 let token = jwt.sign(
-                    { fullName: existingUser.fullName, email: existingUser.email, id: existingUser._id }, 
+                    { username: existingUser.username, email: existingUser.email, id: existingUser._id }, 
                     process.env.PRIVATE_KEY, 
                     {expiresIn : "2h"}
                 );

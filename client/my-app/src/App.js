@@ -11,11 +11,11 @@ function App() {
 
   const [products, setProducts] = useState([]);
 
-  async function readProducts() {
+  const readProducts = () => {
     try {
-      await axios
+      axios
       .get("http://localhost:8080/products")
-      .then((res) => setProducts(res.data));
+      .then((res) => setProducts(res.data))
     } catch (err) {
       console.log(err);
     }
@@ -31,7 +31,7 @@ function App() {
       <Routes>
         <Route path="/form" element={<Form readProducts={readProducts}/>}>Product Form</Route>
         <Route path="/" element={<ProductList products={products} readProducts={readProducts}/>}>exCHANGE</Route>
-        <Route path="/register" element={<Register Register={Register}/>}>Register</Route>
+        <Route path="/register" element={<Register register={Register}/>}>Register</Route>
         <Route path="/login" element={<Login Login={Login}/>}>Log In</Route>
       </Routes>
       </BrowserRouter>

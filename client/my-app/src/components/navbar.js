@@ -8,7 +8,9 @@ function Navbar() {
 
     try {
         token = localStorage.getItem("token");
-        decoded = jwtDecode(token);
+        if (token) {
+            decoded = jwtDecode(token);
+          }
     } catch (err) {
         console.log(err);
     }
@@ -39,7 +41,7 @@ function Navbar() {
                         <Link to="/menu">Menu </Link>
                         <Link to="/mail">Messages </Link>
                         <Link to="/">exCHANGE </Link>
-                        <Link to="/account">{decoded.fullName}</Link>
+                        <Link to="/account">{decoded.username}</Link>
                         <Link to="/wishlist">Wishlist </Link>
                         <Link to="/cart">Cart </Link>
                         <Link onClick={handleLogout}>Log out</Link>
