@@ -48,6 +48,19 @@ function Product({ products, readProducts }) {
       setEditProduct("");
     }
 
+    let categoryOptions = [
+      { value: "Dresses", label: "Dresses"},
+      { value: "Tops", label: "Tops"},
+      { value: "Pants", label: "Pants"},
+      { value: "Skirts", label: "Skirts"},
+      { value: "Shirts", label: "Shirts"},
+      { value: "Knitwear", label: "Knitwear"},
+      { value: "Jackets", label: "Jackets"},
+      { value: "Coats", label: "Coats"},
+      { value: "Shoes", label: "Shoes"},
+      { value: "Bags", label: "Bags"},
+  ];
+
     async function addProduct() {
         try {
             await axios
@@ -111,15 +124,15 @@ function Product({ products, readProducts }) {
                <div style={{backgroundColor: "lightblue", margin: "5px", width: "200px"}}>
                  <span>{product.title}</span><br/>
                  <span>{product.description}</span><br/>
-                 <span>{product.image}</span><br/>
+                 {/* <span>{product.image}</span><br/> */}
+                 {/* firebase rendering here */}
                  <span>{product.status}</span><br/>
                  <span>{product.category}</span>
                  {/* <span>{product.creator.username}</span> */}
                  <div>
                   {token && productCreatorIds.includes(product._id) ? (  <>
                   <button onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
-                  <button onClick={() => setEditProduct({id: product._id})}><FaEdit />
-</button>
+                  <button onClick={() => setEditProduct({id: product._id})}><FaEdit /></button>
                     </>
                   ) : (
                     ""
@@ -128,7 +141,7 @@ function Product({ products, readProducts }) {
                  </div>
                </div>
      
-               
+               {/* editing form */}
                {editProduct.id === product._id && (
                  <div>
                    <input
@@ -145,27 +158,34 @@ function Product({ products, readProducts }) {
                        setEditProduct({ ...editProduct, description: e.target.value })
                      }
                    />
-                   <input
+                   {/* <input
                      type="text"
                      value={product.image}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, image: e.target.value })
                      }
-                   />
-                    <input
-                     type="text"
+                   /> */} 
+                   {/* firebase here */}
+                    
+                    <select
+                     name="status"
                      value={product.status}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, status: e.target.value })
-                     }
-                   />
-                   <input
-                     type="text"
+                     }>
+                      <option value="new">New</option>  
+                      <option value="used">Used</option> 
+                   </select>
+
+                   <select
+                     name="category"
                      value={product.category}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, category: e.target.value })
-                     }
-                   />
+                     }>
+                     {categoryOptions.map(options => <option value={options.value}>{options.label}</option>)}
+                   </select>
+
                    <button onClick={updateProduct}>Save</button>
                    <button onClick={handleCancel}>Cancel</button>
                  </div>
