@@ -10,6 +10,7 @@ import Like from "./components/wishlist.js";
 import Messages from "./components/messages.js";
 import Cart from "./components/cart.js";
 import Menu from "./components/menu.js";
+import Account from "./components/myAccount.js";
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/mail" element={<Messages Messages={Messages}/>}/>
         <Route path="/cart" element={<Cart Cart={Cart}/>}/>
         <Route path="/menu" element={<Menu Menu={Menu}/>}/>
+        <Route path="/account" element={<Account Account={Account}/>}/>
       </Routes>
       </BrowserRouter>
   );
