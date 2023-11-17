@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Like = () => {
+const Messages = () => {
     return (
         <div>
-            <h2>Wishlist</h2>
+            <h2>Messages</h2>
         </div>
     )
 }
 
-export default Like;
+export default Messages;

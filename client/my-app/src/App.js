@@ -6,6 +6,10 @@ import ProductList from "./components/productList.js";
 import Navbar from "./components/navbar.js";
 import Login from "./components/login.js";
 import Register from "./components/register.js";
+import Like from "./components/wishlist.js";
+import Messages from "./components/messages.js";
+import Cart from "./components/cart.js";
+import Menu from "./components/menu.js";
 
 function App() {
 
@@ -33,6 +37,10 @@ function App() {
         <Route path="/" element={<ProductList products={products} readProducts={readProducts}/>}>exCHANGE</Route>
         <Route path="/register" element={<Register register={Register}/>}>Register</Route>
         <Route path="/login" element={<Login Login={Login}/>}>Log In</Route>
+        <Route path="/wishlist" element={<Like Like={Like}/>}/>
+        <Route path="/mail" element={<Messages Messages={Messages}/>}/>
+        <Route path="/cart" element={<Cart Cart={Cart}/>}/>
+        <Route path="/menu" element={<Menu Menu={Menu}/>}/>
       </Routes>
       </BrowserRouter>
   );

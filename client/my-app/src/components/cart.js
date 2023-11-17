@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Like = () => {
+const Cart = () => {
     return (
         <div>
-            <h2>Wishlist</h2>
+            <h2>My cart</h2>
         </div>
     )
 }
 
-export default Like;
+export default Cart;
