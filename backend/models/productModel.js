@@ -8,6 +8,7 @@ const productSchema = new mongoose.Schema({
     category: String,
     creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     // liked: Boolean,
+    // cart: Boolean,
 })
 
 const Product = mongoose.model("Product", productSchema);

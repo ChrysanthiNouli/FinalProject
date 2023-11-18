@@ -7,6 +7,7 @@ const Account = () => {
         <div>
             <h2>My account</h2>
             <Link to="/form">Add a product to exchange</Link>
+            <Link to="/orders">My Orders</Link>
         </div>
     )
 }

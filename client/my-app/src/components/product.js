@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
-
+import { FaEdit, FaRegTrashAlt, FaShoppingCart } from "react-icons/fa";
 
 function Product({ products, readProducts }) {
     const [productCreatorIds, setProductCreatorIds] = useState([]); 
@@ -71,7 +70,6 @@ function Product({ products, readProducts }) {
                 image:"",
                 status:"",
                 category: "",
-                // creator: "",
             })
             .then(() => readProducts());
         } catch(err) {
@@ -115,7 +113,19 @@ function Product({ products, readProducts }) {
         }
     } else {
       return;
-    }
+    };
+
+    async function addToCart(id) {
+      try {
+        let res = await axios
+        .post(`http://localhost:8080/${id}`);
+        alert(res.data.msg);
+        readProducts();
+      } catch(err) {
+        console.log("Cannot add to cart, ", err);
+      };
+    };
+
   }
     return (
         <div>
@@ -130,6 +140,7 @@ function Product({ products, readProducts }) {
                  <span>{product.category}</span>
                  {/* <span>{product.creator.username}</span> */}
                  <div>
+                  <button onClick={() => addToCart(product._id)}><FaShoppingCart /></button>
                   {token && productCreatorIds.includes(product._id) ? (  <>
                   <button onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
                   <button onClick={() => setEditProduct({id: product._id})}><FaEdit /></button>
