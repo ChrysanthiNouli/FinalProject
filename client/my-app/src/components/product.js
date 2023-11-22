@@ -2,15 +2,32 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { FaEdit, FaRegTrashAlt, FaShoppingCart } from "react-icons/fa";
+import "../components/product.css";
+import { Firebase } from "../components/firebaseImages.js";
+import { Cart } from "../components/cart.js";
 
 function Product({ products, readProducts }) {
     const [productCreatorIds, setProductCreatorIds] = useState([]); 
+    const [cart, setCart] = useState([]);
     let token = localStorage.getItem("token");
     let decoded;
     if (token) {
       decoded = jwtDecode(token);
     }
-    
+
+    const addToCart = (product) => {
+        const newCart = cart.filter((cart) => cart.id === product.id);
+        if (newCart) {
+            const updatedCart = [...cart, product];
+            setCart(updatedCart);
+        }
+    }
+    const removeFromCart = (product) => {
+        const newCart = cart.filter((cart) => cart.id !== product.id);
+        setCart(newCart);
+    };
+
+
     const filterUser = () => {
       try {
         let productCreatorIds = products
@@ -115,32 +132,21 @@ function Product({ products, readProducts }) {
       return;
     };
 
-    async function addToCart(id) {
-      try {
-        let res = await axios
-        .post(`http://localhost:8080/${id}`);
-        alert(res.data.msg);
-        readProducts();
-      } catch(err) {
-        console.log("Cannot add to cart, ", err);
-      };
-    };
-
   }
     return (
-        <div>
+        <div class="container text-center">
             {products.map((product) => (
-               <div key={product._id}>
-               <div style={{backgroundColor: "lightblue", margin: "5px", width: "200px"}}>
+               <div key={product._id} class="col">
+               <div class="col" style={{backgroundColor: "lightblue", margin: "5px", width: "200px"}}>
                  <span>{product.title}</span><br/>
                  <span>{product.description}</span><br/>
-                 {/* <span>{product.image}</span><br/> */}
-                 {/* firebase rendering here */}
+                  {/* firebase rendering here */}
+                 {/* <span>{<img src={url}/>}</span><br/> */}
                  <span>{product.status}</span><br/>
                  <span>{product.category}</span>
                  {/* <span>{product.creator.username}</span> */}
                  <div>
-                  <button onClick={() => addToCart(product._id)}><FaShoppingCart /></button>
+                  <button onClick={ () => setCart([])}><FaShoppingCart /></button>
                   {token && productCreatorIds.includes(product._id) ? (  <>
                   <button onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
                   <button onClick={() => setEditProduct({id: product._id})}><FaEdit /></button>

@@ -6,9 +6,7 @@ const productSchema = new mongoose.Schema({
     // image: String,
     status: String,
     category: String,
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    // liked: Boolean,
-    // cart: Boolean,
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 })
 
 const Product = mongoose.model("Product", productSchema);

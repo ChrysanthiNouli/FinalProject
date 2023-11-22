@@ -52,15 +52,15 @@ function Form({ readProducts }) {
         });
     };
      // firebase 
-    useEffect(() => {
-        listAll(imageListRef).then((res) => {
-            res.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setImageList((currentValue) => [...currentValue, url]);
-                });
-            });
-        });
-    }, []);
+    // useEffect(() => {
+    //     listAll(imageListRef).then((res) => {
+    //         res.items.forEach((item) => {
+    //             getDownloadURL(item).then((url) => {
+    //                 setImageList((currentValue) => [...currentValue, url]);
+    //             });
+    //         });
+    //     });
+    // }, []);
      // firebase
     const addProduct = (e) => {
         e.preventDefault();
@@ -86,14 +86,10 @@ function Form({ readProducts }) {
         <input type="text" name="description" onChange={handleInputChange} value={product.description} placeholder="description"/><br/>
         </label>
 
-
         <label>Image<br/>
         <input type="file" onChange={(e) => {setImageUpload(e.target.files[0])}}/>
-        <button onClick={uploadImage}>Upload an Image</button>
         <br/>
-        {imageList.map((url) => {
-            return <img src={url}/>
-        })}
+        
 
         {/* <input type="text" name="image" onChange={handleInputChange} value={product.image} placeholder="image"/><br/> */}
         </label>
@@ -110,7 +106,7 @@ function Form({ readProducts }) {
         <br/>
         </label>
         <br/>
-        <button type="submit" onClick={(e) => {addProduct(e)}}>Submit</button>
+        <button type="submit" onClick={(e) => {addProduct(e); uploadImage(e);}}>Submit</button>
 
     </form>
     </div>

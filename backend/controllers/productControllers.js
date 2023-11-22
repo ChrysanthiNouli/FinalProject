@@ -12,8 +12,8 @@ const readProducts = async (req, res) => {
 const addProduct = async (req, res) => {
     try {
         let creator = req.user.id;
-        let { title, description, image, status, category } = req.body;
-        const newProduct = { title, description, image, status, category, creator };
+        let { title, description, status, category } = req.body;
+        const newProduct = { title, description, status, category, creator };
         const createdProduct = await Product.create(newProduct);
         res.status(200).send(createdProduct);
     } catch (err) {

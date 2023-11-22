@@ -29,7 +29,7 @@ function Navbar() {
     return (
         <div>
             {!token ? ( 
-                <nav>
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div>
                     <Link to="/menu"><FaBars /> </Link>
                     <Link to="/">exCHANGE </Link>
@@ -37,7 +37,7 @@ function Navbar() {
                     <Link to="/register">Register</Link>
                     </div>
                 </nav> ) : (
-                    <nav>
+                    <nav class="navbar navbar-expand-lg bg-body-tertiary">
                         <div>
                         <Link to="/menu"><FaBars /> </Link>
                         <Link to="/mail"><FaRegEnvelope /></Link>
