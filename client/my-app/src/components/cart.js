@@ -1,29 +1,47 @@
 import React from "react";
-// import axios from "axios";
-import { useEffect, useState } from "react";
-// import Product from "../components/product.js"
+ 
+const Cart = (functionalities) => {
+  const { cartItems, addToCart, removeFromCart } = functionalities;
+  const shippingPrice = 0;
+  return (
+    <>
+      <h2>Cart Items</h2>
+      <div>
+        {cartItems.length === 0 && <div>Cart is empty</div>}
+        {cartItems.map((item) => (
+          <div key={item.id} className="row">
+            <div className="col-2">{item.name}</div>
+            <div className="col-2">
+              <button onClick={() => removeFromCart(item)} className="remove">
+                -
+              </button>{' '}
+              <button onClick={() => addToCart(item)} className="add">
+                +
+              </button>
+            </div>
+          </div>
+        ))}
 
-const Cart = () => {
-  const [cart, setCart] = useState([]);
-    return (
-        <div>
-            <h2>My cart</h2>
-            {cart.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <ul>
-          {cart.map((product) => (
-            <li key={product.id}>
-              <span>{product.title}</span>
-              {/* <button onClick={() => removeFromCart(product)}>Remove</button> */}
-
-            </li>
-          ))}
-        </ul>
-      )}
-      
-        </div>
-    )
+        {cartItems.length !== 0 && (
+          <>
+            <hr></hr>
+            <div className="row">
+              <div className="col-2">Shipping Price</div>
+              <div className="col-1 text-right">
+                ${shippingPrice.toFixed(2)}
+              </div>
+            </div>
+            <hr />
+            <div className="row">
+              <button onClick={() => alert('Implement Checkout!')}>
+                Checkout
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  );
 }
 
 export default Cart;

@@ -2,6 +2,7 @@ import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import "../components/login.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -33,14 +34,14 @@ const Login = () => {
     } 
 
 return (
-    <div>
+    <div className="formContainer">
         <form onSubmit={handleLogin}>
             <h1>Log in</h1>
             {token && <p>{decoded.email}</p>}
-                <label htmlFor="email">Email</label><br/>
-                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
-                <label htmlFor="password">Password</label><br/>
-                <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/><br/>
+                <label htmlFor="email"></label><br/>
+                <input type="email" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
+                <label htmlFor="password"></label><br/>
+                <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/><br/>
                 <input type="submit" value="Log in"/>
         </form>
     </div>

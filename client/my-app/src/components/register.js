@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../components/register.css";
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -15,15 +16,15 @@ const Register = () => {
         navigate("/login");
     }
      return (
-        <div>
+        <div className="formContainer">
             <form onSubmit={handleRegister}>
                 <h1>Register</h1>
-                <label  htmlFor="username">Username</label><br/>
-                <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)}/><br/>
-                <label  htmlFor="email">Email</label><br/>
-                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
-                <label  htmlFor="password">Password</label><br/>
-                <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/><br/>
+                <label  htmlFor="username"></label><br/>
+                <input type="text" id="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/><br/>
+                <label  htmlFor="email"></label><br/>
+                <input type="email" placeholder="Email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
+                <label  htmlFor="password"></label><br/>
+                <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/><br/>
                 <input type="submit" value="Register"/>
             </form>
         </div>

@@ -1,7 +1,8 @@
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { React } from "react";
+//import { slide as Menu } from 'react-burger-menu';
 
-const Menu = () => {
+const MenuList = () => {
     return (
         <div>
             <Link to="/about">About</Link>
@@ -9,5 +10,4 @@ const Menu = () => {
         </div>
     );
 }
-
-export default Menu;
+export default MenuList;

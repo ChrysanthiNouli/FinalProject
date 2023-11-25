@@ -2,33 +2,23 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { FaEdit, FaRegTrashAlt, FaShoppingCart } from "react-icons/fa";
+import { Cart } from "../components/cart.js"
 import "../components/product.css";
-import { Firebase } from "../components/firebaseImages.js";
-import { Cart } from "../components/cart.js";
+//import { Firebase } from "../components/firebaseImages.js";
 
 function Product({ products, readProducts }) {
     const [productCreatorIds, setProductCreatorIds] = useState([]); 
-    const [cart, setCart] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
+  
     let token = localStorage.getItem("token");
     let decoded;
+    let userId;
     if (token) {
       decoded = jwtDecode(token);
+      userId = decoded.id;
     }
 
-    const addToCart = (product) => {
-        const newCart = cart.filter((cart) => cart.id === product.id);
-        if (newCart) {
-            const updatedCart = [...cart, product];
-            setCart(updatedCart);
-        }
-    }
-    const removeFromCart = (product) => {
-        const newCart = cart.filter((cart) => cart.id !== product.id);
-        setCart(newCart);
-    };
-
-
-    const filterUser = () => {
+      const filterUser = () => {
       try {
         let productCreatorIds = products
         .filter((product) => product.creator._id === decoded.id)
@@ -41,7 +31,7 @@ function Product({ products, readProducts }) {
 
     useEffect (() => {
       filterUser();
-    }, [decoded]);
+    }, [token, userId]);
 
     const [newProduct, setNewProduct] = useState({
         title:"",
@@ -146,7 +136,7 @@ function Product({ products, readProducts }) {
                  <span>{product.category}</span>
                  {/* <span>{product.creator.username}</span> */}
                  <div>
-                  <button onClick={ () => setCart([])}><FaShoppingCart /></button>
+                  <button onClick={(product) => {  console.log("clicked")}}><FaShoppingCart /></button>
                   {token && productCreatorIds.includes(product._id) ? (  <>
                   <button onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
                   <button onClick={() => setEditProduct({id: product._id})}><FaEdit /></button>

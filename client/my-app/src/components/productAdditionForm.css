@@ -1,0 +1,91 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #DFECE3;
+    border: 1px solid transparent;
+    box-shadow: 20px 20px 80px #243733;
+    border-radius: 5px;
+    width: 40%;
+    height: 500px;
+    opacity: 95%;
+    color: white;
+}
+
+.formContainer {
+    background-image: url(../components/sus.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.submitBtn {
+    background-color: #A15949;
+    color: #DFECE3;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    opacity: 100%;
+}
+
+.submitBtn:hover {
+    box-shadow: 20px 20px 80px #A15949;
+}
+
+.status {
+    display: flex;
+    flex-direction: row;
+    align-items: space-evenly;
+    align-items: center;
+    justify-content: center;
+}
+
+.category {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=file] {
+    /* background-color: #7DA063;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    opacity: 100%; */
+    display: none;
+}
+
+.custom-file-upload {
+    cursor: pointer;
+    background-color: #A15949;
+    color: #DFECE3;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    opacity: 100%;
+}
+
+select {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 15px;
+    opacity: 100%;
+    color: black;
+}
+
+select:focus {
+   outline: 2px solid #7DA063;
+}

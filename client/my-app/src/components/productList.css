@@ -1,0 +1,19 @@
+.intro{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    background-repeat: no-repeat; 
+    background-image:url("../components/suszoom.jpg"), linear-gradient(to left,#eefaf5, #dff6ec);
+    height: 500px;
+}
+
+.introParagraph {
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    width: 50%;
+    line-height: 1.5; 
+    font-size: 18px;
+    background-color: tomato;
+}

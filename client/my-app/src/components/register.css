@@ -1,0 +1,59 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #DFECE3;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 40%;
+    height: 500px;
+    opacity: 95%;
+    color: #243733;
+}
+
+.formContainer {
+    background-image: url(../components/sus.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+input[type=submit] {
+    background-color: #A15949;
+    color: #DFECE3;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    opacity: 100%;
+}
+
+input[type=submit]:hover {
+    box-shadow: 20px 20px 80px #A15949;
+}
+
+input[type=text],
+input[type=email], 
+input[type=password] {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 15px;
+    opacity: 100%;
+    color: black;
+}
+
+input[type=text]:focus,
+input[type=email]:focus, 
+input[type=password]:focus {
+   outline: 2px solid #A15949;
+}

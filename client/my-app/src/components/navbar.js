@@ -1,8 +1,12 @@
 import {Link, useNavigate} from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { FaBars, FaHeart, FaRegEnvelope, FaShoppingCart, FaUser } from 'react-icons/fa';
+import Navbar from 'react-bootstrap/Nav';
+import Nav from 'react-bootstrap/Nav';
+import Container from 'react-bootstrap/Container';
+import "../navbar.css";
 
-function Navbar() {
+function NavbarFunction() {
     const navigate = useNavigate();
     let token;
     let decoded;
@@ -27,30 +31,46 @@ function Navbar() {
     }
 
     return (
-        <div>
+        <div className="navbarContainer">
             {!token ? ( 
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                    <div>
-                    <Link to="/menu"><FaBars /> </Link>
-                    <Link to="/">exCHANGE </Link>
-                    <Link to="/login">Login </Link>
-                    <Link to="/register">Register</Link>
+                <Navbar className="nav">
+                    <div className="linkContainer">
+                    <div className="left">
+                            <Link className="Link" to="/menu"><FaBars /> </Link>
                     </div>
-                </nav> ) : (
-                    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                        <div>
-                        <Link to="/menu"><FaBars /> </Link>
-                        <Link to="/mail"><FaRegEnvelope /></Link>
-                        <Link to="/">exCHANGE </Link>
-                        <Link to="/account"><FaUser />{decoded.username}</Link>
-                        <Link to="/wishlist"><FaHeart /></Link>
-                        <Link to="/cart"><FaShoppingCart /></Link>
-                        <Link onClick={handleLogout}>Log out</Link>
+                    <div className="center">
+                            <Link className="Link" to="/">exCHANGE </Link>
+                    </div>
+                    <div className="right">
+                            <Link className="Link"to="/login">Login </Link>
+                            <Link className="Link" to="/register">Register</Link>
+                    </div>
+                    </div>
+                </Navbar> ) : (
+                    <Navbar className="nav">
+                        <div className="linkContainer">
+
+                        <div className="left">   
+                        <span className="burgerMenu"><Link className="Link" to="/menu"><FaBars /> </Link></span>
+                        {/* <Link to="/mail"><FaRegEnvelope /></Link> */}
                         </div>
-                    </nav> 
+
+                        <div className="center">
+                        <span ><Link className="Link" to="/">exCHANGE </Link></span>
+                        </div>
+                        
+                        <div className="right">
+                        <span className=""><Link className="Link" to="/account"><FaUser />{decoded.username}</Link></span>
+                        {/* <Link to="/wishlist"><FaHeart /></Link> */}
+                        <span className=""><Link  className="Link" to="/cart"><FaShoppingCart /></Link></span>
+                        <span className="logout"><Link className="Link" onClick={handleLogout}>Log out</Link></span>
+                        </div>
+
+                        </div>
+                    </Navbar> 
                 )}
         </div>
     );
 }
 
-export default Navbar;
+export default NavbarFunction;

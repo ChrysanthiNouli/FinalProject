@@ -1,0 +1,25 @@
+.about{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    background-repeat: no-repeat; 
+    background-image:url("../components/suszoom.jpg"), linear-gradient(to left,#eefaf5, #dff6ec);
+    
+}
+
+.titleParagraph {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 20px;
+    margin-right: 20px;
+ }
+
+.aboutParagraph {
+    margin: 5px;
+    padding: 5px;
+    width: 50%;
+    line-height: 1.5; 
+    font-size: 18px;
+}

@@ -1,16 +1,15 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { storage } from "../firebase.js";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"; 
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; 
 import { v4 } from "uuid";
+import "../components/productAdditionForm.css";
 
 function Form({ readProducts }) {
-    // firebase
-    const [imageUpload, setImageUpload] = useState(null);
-    const imageListRef = ref(storage, "images/");
-    const [imageList, setImageList] = useState([]);
-     // firebase
     let token = localStorage.getItem("token");
+    const navigate = useNavigate();
+    const [selectedFile, setSelectedFile] = useState(null);
     const [product, setProduct] = useState({
         title:"",
         description:"",
@@ -40,73 +39,88 @@ function Form({ readProducts }) {
     };
     
      // firebase 
-    const uploadImage = () => {
-        if (imageUpload == null) {
-            return;
-        };
-        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-        uploadBytes(imageRef, imageUpload).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                setImageList((currentValue) => [...currentValue, url]);
-            });
-        });
-    };
-     // firebase 
-    // useEffect(() => {
-    //     listAll(imageListRef).then((res) => {
-    //         res.items.forEach((item) => {
-    //             getDownloadURL(item).then((url) => {
-    //                 setImageList((currentValue) => [...currentValue, url]);
-    //             });
-    //         });
-    //     });
-    // }, []);
+     const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        // Check if the selected file is an image (JPEG, PNG, or GIF)
+        if (file && isImageFile(file)) {
+          setSelectedFile(file);
+        } else {
+          alert("Please select a valid image file (JPEG, PNG, or GIF).");
+        }
+       };
+    
+      const isImageFile = (file) => {
+        const acceptedTypes = ["image/jpeg", "image/png", "image/gif"];
+        return acceptedTypes.includes(file.type);
+      };
+      
      // firebase
-    const addProduct = (e) => {
+    async function addProduct (e) {
         e.preventDefault();
+        
+        if (!selectedFile) {
+            alert("Please select a valid image file (JPEG, PNG, or GIF).");
+            return;
+          }
+
         try {
-            axios
-            .post("http://localhost:8080/products/create", product, {headers:{Authorization:`Bearer ${token}`}})
-            .then((res) => {
-                alert(res.data.msg);
-                readProducts();
-            })
+            const fileRef = ref(storage, `${v4()}`);
+            await uploadBytes(fileRef, selectedFile);
+            const fileURL = await getDownloadURL(fileRef);
+            const productWithFile = { ...product, photoURL: fileURL };
+                await axios
+                    .post("http://localhost:8080/products/create", productWithFile, {headers:{Authorization:`Bearer ${token}`}})
+                    // .then((res) => {
+                    //     alert(res.data.msg);
+                    await readProducts();
+                    navigate("/");
+                   // })
         } catch (err) {
             console.log(err);
         }
-    };
+    }
     return (
     <div>
     <div className="formContainer">
         <form className="form">
-        <label> Title <br/>
+          <h2>Add a product you wish to exchange</h2>
+        <label><br/>
         <input type="text" name="title" onChange={handleInputChange} value={product.title} placeholder="Title"/><br/>
         </label>
-        <label> Description<br/>
-        <input type="text" name="description" onChange={handleInputChange} value={product.description} placeholder="description"/><br/>
+        <label><br/>
+        <input type="text" name="description" onChange={handleInputChange} value={product.description} placeholder="Description"/><br/>
         </label>
-
-        <label>Image<br/>
-        <input type="file" onChange={(e) => {setImageUpload(e.target.files[0])}}/>
         <br/>
-        
 
-        {/* <input type="text" name="image" onChange={handleInputChange} value={product.image} placeholder="image"/><br/> */}
-        </label>
-        <label> Status<br/>
+        <div className="status">
+        <label> Status &nbsp;&nbsp;&nbsp;
         <select name="status" onChange={handleInputChange} value={product.status}>
             <option value="new">New</option>  
             <option value="used">Used</option>   
-        </select><br/>
+        </select><br/> 
         </label>
-        <label> Category<br/>
+        </div>
+        <br/>
+
+       <div className="category">
+        <label> Category &nbsp;&nbsp;&nbsp;
         <select name="category" onChange={handleInputChange} value={product.category}>
             {categoryOptions.map(options => <option value={options.value}>{options.label}</option>)}
         </select>   
         <br/>
         </label>
+        </div>
         <br/>
-        <button type="submit" onClick={(e) => {addProduct(e); uploadImage(e);}}>Submit</button>
+        
+        <label className="custom-file-upload"> Click to add an Image
+        <input type="file" onChange={() => handleFileChange()}/>  
+        {/* <input type="text" name="image" onChange={handleFileChange}  placeholder="image"/><br/> */}
+        </label>
+        
+
+
+        <br/>
+        <button className="submitBtn" type="submit" onClick={(e) => {addProduct(e); handleFileChange(e);}}>Submit</button>
 
     </form>
     </div>
