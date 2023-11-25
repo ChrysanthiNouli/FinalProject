@@ -83,7 +83,7 @@ function Form({ readProducts }) {
     <div>
     <div className="formContainer">
         <form className="form">
-          <h2>Add a product you wish to exchange</h2>
+          <h2>The product you wish to exchange</h2>
         <label><br/>
         <input type="text" name="title" onChange={handleInputChange} value={product.title} placeholder="Title"/><br/>
         </label>
@@ -93,7 +93,7 @@ function Form({ readProducts }) {
         <br/>
 
         <div className="status">
-        <label> Status &nbsp;&nbsp;&nbsp;
+        <label> Condition &nbsp;&nbsp;&nbsp;
         <select name="status" onChange={handleInputChange} value={product.status}>
             <option value="new">New</option>  
             <option value="used">Used</option>   

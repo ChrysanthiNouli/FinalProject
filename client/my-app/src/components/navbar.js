@@ -51,7 +51,7 @@ function NavbarFunction() {
                         <div className="linkContainer">
 
                         <div className="left">   
-                        <span className="burgerMenu"><Link className="Link" to="/menu"><FaBars /> </Link></span>
+                        <span className="burgerMenu"><Link className="Link" to="/menu"><FaBars /> <img src="./Untitled design.svg"></img></Link></span>
                         {/* <Link to="/mail"><FaRegEnvelope /></Link> */}
                         </div>
 

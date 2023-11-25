@@ -124,27 +124,25 @@ function Product({ products, readProducts }) {
 
   }
     return (
-        <div class="container text-center">
+        <div class="productContainer">
             {products.map((product) => (
                <div key={product._id} class="col">
-               <div class="col" style={{backgroundColor: "lightblue", margin: "5px", width: "200px"}}>
-                 <span>{product.title}</span><br/>
-                 <span>{product.description}</span><br/>
-                  {/* firebase rendering here */}
-                 {/* <span>{<img src={url}/>}</span><br/> */}
-                 <span>{product.status}</span><br/>
-                 <span>{product.category}</span>
+               <div class="productCard">
+                 <span className="image">{/*{<img src={url}/>} */}</span><br/>
+                 <span className="title">{product.title}</span>
+                 <span className="description">{product.description}</span>
+                 <span className="productStatus">Condition: {product.status}</span>
+                 {/* <span>{product.category}</span> */}
                  {/* <span>{product.creator.username}</span> */}
-                 <div>
-                  <button onClick={(product) => {  console.log("clicked")}}><FaShoppingCart /></button>
+                 <div className="btnContainer">
+                  <button className="formBtn" onClick={(product) => {  console.log("clicked")}}>Add <FaShoppingCart /></button>
                   {token && productCreatorIds.includes(product._id) ? (  <>
-                  <button onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
-                  <button onClick={() => setEditProduct({id: product._id})}><FaEdit /></button>
+                  <button className="formBtn" onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
+                  <button className="formBtn" onClick={() => setEditProduct({id: product._id})}><FaEdit /></button>
                     </>
                   ) : (
                     ""
-                  )}   
-                                 
+                  )}               
                  </div>
                </div>
      
