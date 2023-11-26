@@ -1,13 +1,15 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../components/myAccount.css";
 
 const Account = () => {
     return (
-        <div>
-            <h2>My account</h2>
-            <Link to="/form">Add a product to exchange</Link>
-            <Link to="/orders">My Orders</Link>
+        <div className="accountBackground">
+            <table className="linkList">
+            <th><h2 className="accountTitle">My account</h2></th>
+            <tr><Link className="accountLink" to="/form">Add a product to exchange</Link></tr>
+            <tr><Link className="accountLink" to="/orders">My Orders</Link></tr>
+            </table>
         </div>
     )
 }

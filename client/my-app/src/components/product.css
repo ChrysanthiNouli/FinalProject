@@ -1,5 +1,5 @@
 img {
-    height: 50%;
+    height: 140px;
     border: 1px solid transparent;
     border-radius: 3px;
 }
@@ -11,22 +11,23 @@ img {
     grid-gap: 10px;
     justify-content: center;
     justify-items: center;
+    align-content: end;
     align-items: center;
     margin: 15px;
-    width: 100%;
+    width: 98%;
 }
 
 .productCard {
     background-color: #DFECE3;
     padding: 20px;
-    justify-self: center;
-    align-self: center;
-    width: 100%;
-    height: 100%;
+    justify-self: end;
+    align-self: end;
     border: 1px solid transparent;
     border-radius: 3px;
     display: flex;
     flex-direction: column;
+    width: 220px;
+    height: 280px;
 }
 
 .formBtn {

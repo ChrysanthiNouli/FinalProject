@@ -6,7 +6,7 @@ import { Cart } from "../components/cart.js"
 import "../components/product.css";
 //import { Firebase } from "../components/firebaseImages.js";
 
-function Product({ products, readProducts }) {
+function Product({ products, readProducts, addToCart, removeFromCart}) {
     const [productCreatorIds, setProductCreatorIds] = useState([]); 
     const [cartItems, setCartItems] = useState([]);
   
@@ -122,6 +122,33 @@ function Product({ products, readProducts }) {
       return;
     };
 
+
+   const addToCart = async function addToCart() {
+      try {
+        await axios
+        .post("http://localhost:8000/cart/add", cartItems);
+        setCartItems({})
+        .then(() => readProducts());
+      } catch (err) {
+        console.log("Cannot add product to cart, ", err);
+      }};
+  
+    
+   async function removeFromCart(id) {
+    if (window.confirm("Do you want to remove this product from your cart?")) {
+      try {
+          let res = await axios
+          .delete(`http://localhost:8080/cart/${id}`);
+          alert(res.data.msg);
+          readProducts();
+      } catch(err) {
+          console.log("Cannot delete product, ", err);
+      }
+    } else {
+      return;
+    }
+  }
+    
   }
     return (
         <div class="productContainer">
@@ -135,7 +162,7 @@ function Product({ products, readProducts }) {
                  {/* <span>{product.category}</span> */}
                  {/* <span>{product.creator.username}</span> */}
                  <div className="btnContainer">
-                  <button className="formBtn" onClick={(product) => {  console.log("clicked")}}>Add <FaShoppingCart /></button>
+                  <button className="formBtn" onClick={(e) => {addToCart(e)}}>Add <FaShoppingCart /></button>
                   {token && productCreatorIds.includes(product._id) ? (  <>
                   <button className="formBtn" onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
                   <button className="formBtn" onClick={() => setEditProduct({id: product._id})}><FaEdit /></button>

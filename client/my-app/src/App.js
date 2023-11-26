@@ -14,9 +14,9 @@ import Account from "./components/myAccount.js";
 import Product from "./components/product.js";
 import Footer from "./components/footer.js";
 import About from "./components/about.js";
+import addToCart from "./components/product.js";
 
 function App() {
-
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
@@ -30,50 +30,7 @@ function App() {
     }
   };
 
-  // const addToCart = (product) => {
-  //   const exist = cartItems.find((x) => x.id === product.id);
-  //   if (!exist) {
-  //     setCartItems([...cartItems, product]); 
-  //     console.log("added")
-  //   } else {
-  //     console.log("not")
-  //     return;
-
-  //   }
-  // };
-    const addToCart = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
-    }
-  };
   
- const removeFromCart = (product) => {
-  const exist = cartItems.find((x) => x.id === product.id);
-  if (exist) {
-    setCartItems(cartItems.filter((x) => x.id !== product.id));
-  } else {
-    return;
-  }
-};
-//   const onRemove = (product) => {
-//     const exist = cartItems.find((x) => x.id === product.id);
-//     if (exist.qty === 1) {
-//       setCartItems(cartItems.filter((x) => x.id !== product.id));
-//     } else {
-//       setCartItems(
-//         cartItems.map((x) =>
-//           x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-//         )
-//       );
-//     }
-//   };
 
   useEffect(() => {
     readProducts();
@@ -85,12 +42,12 @@ function App() {
       <NavbarFunction/>
       <Routes>
         <Route path="/form" element={<Form readProducts={readProducts}/>}>Product Form</Route>
-        <Route path="/" element={<ProductList products={products} cartItems={cartItems} readProducts={readProducts} addToCart={addToCart}/>}>exCHANGE</Route>
+        <Route path="/" element={<ProductList products={products} cartItems={cartItems} addToCart={addToCart} readProducts={readProducts}/>}>exCHANGE</Route>
         <Route path="/register" element={<Register register={Register}/>}>Register</Route>
         <Route path="/login" element={<Login Login={Login}/>}>Log In</Route>
         <Route path="/wishlist" element={<Like Like={Like}/>}/>
         <Route path="/mail" element={<Messages Messages={Messages}/>}/>
-        <Route path="/cart" element={<Cart Cart={Cart} cartItems={cartItems} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
+        <Route path="/cart" element={<Cart Cart={Cart} cartItems={cartItems}/>}/>
         <Route path="/menu" element={<MenuList MenuList={MenuList}/>}/>
         <Route path="/account" element={<Account Account={Account}/>}/>
         <Route path="/about" element={<About About={About}/>}/>

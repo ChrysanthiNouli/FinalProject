@@ -54,14 +54,6 @@ form {
 }
 
 input[type=file] {
-    /* background-color: #7DA063;
-    color: white;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    padding: 8px;
-    font-size: 15px;
-    cursor: pointer;
-    opacity: 100%; */
     display: none;
 }
 

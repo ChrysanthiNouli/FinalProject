@@ -1,0 +1,47 @@
+.accountBackground {
+    background-image: url(../components/sus.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+}
+
+.accountTitle {
+
+}
+
+.linkList {
+    background-color: #DFECE3;
+    border-bottom: 1px solid #243733;
+    box-shadow: 20px 20px 80px #243733;
+    border-radius: 5px;
+    width: 40%;
+    height: 200px;
+    opacity: 95%;
+    color: white;
+    margin: 100px;
+}
+
+tr {
+   width: 100%; 
+}
+
+tr:hover {
+    background-color: #243733;
+    color:#DFECE3;
+}
+
+.accountLink {
+    cursor: pointer;  
+    border: none;
+    text-decoration: none;
+}
+
+.accountLink:visited {
+    color:#243733;
+}
+
+.accountLink:hover {
+    color:#DFECE3;
+}

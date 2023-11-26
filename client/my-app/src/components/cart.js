@@ -9,8 +9,8 @@ const Cart = (functionalities) => {
       <div>
         {cartItems.length === 0 && <div>Cart is empty</div>}
         {cartItems.map((item) => (
-          <div key={item.id} className="row">
-            <div className="col-2">{item.name}</div>
+          <div className="row">
+            <div className="col-2">{item}</div>
             <div className="col-2">
               <button onClick={() => removeFromCart(item)} className="remove">
                 -
@@ -33,7 +33,7 @@ const Cart = (functionalities) => {
             </div>
             <hr />
             <div className="row">
-              <button onClick={() => alert('Implement Checkout!')}>
+              <button onClick={() => alert("Let's Checkout!")}>
                 Checkout
               </button>
             </div>
