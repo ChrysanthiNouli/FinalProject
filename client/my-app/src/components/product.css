@@ -2,6 +2,7 @@ img {
     height: 140px;
     border: 1px solid transparent;
     border-radius: 3px;
+    width: 100%;
 }
 
 .productContainer {
@@ -19,10 +20,10 @@ img {
 
 .productCard {
     background-color: #DFECE3;
-    padding: 20px;
+    padding: 0px;
     justify-self: end;
     align-self: end;
-    border: 1px solid transparent;
+    border: 0px solid transparent;
     border-radius: 3px;
     display: flex;
     flex-direction: column;

@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { FaEdit, FaRegTrashAlt, FaShoppingCart } from "react-icons/fa";
-import { Cart } from "../components/cart.js"
 import "../components/product.css";
 //import { Firebase } from "../components/firebaseImages.js";
 
@@ -143,7 +142,7 @@ function Product({ products, readProducts, addToCart, removeFromCart }) {
     }
   }
 
-   async function addToCart(e) {
+   async function addToCart() {
      
       try {
         await axios
@@ -176,7 +175,7 @@ function Product({ products, readProducts, addToCart, removeFromCart }) {
             {products.map((product) => (
                <div key={product._id} className="col">
                <div className="productCard">
-                 <span className="image">{/*{<img src={url}/>} */}</span><br/>
+                 <span className="image"><img src={product.image}/></span><br/>
                  <span className="title">{product.title}</span>
                  <span className="description">{product.description}</span>
                  <span className="productStatus">Condition: {product.status}</span>

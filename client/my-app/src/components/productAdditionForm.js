@@ -10,6 +10,8 @@ function Form({ readProducts }) {
     let token = localStorage.getItem("token");
     const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState(null);
+    //const [imageUrls, setImageUrls] = useState([]);
+    
     const [product, setProduct] = useState({
         title:"",
         description:"",
@@ -18,6 +20,15 @@ function Form({ readProducts }) {
         category:"",
     });
         
+    const [newProduct, setNewProduct] = useState({
+      title:"",
+      description:"",
+      image:"",
+      status:"",
+      category: "",
+      creator: "",
+  })
+
     let categoryOptions = [
         { value: "Dresses", label: "Dresses"},
         { value: "Tops", label: "Tops"},
@@ -41,48 +52,57 @@ function Form({ readProducts }) {
      // firebase 
      const handleFileChange = (e) => {
         const file = e.target.files[0];
+        console.log(file);
         // Check if the selected file is an image (JPEG, PNG, or GIF)
-        if (file && isImageFile(file)) {
+        if (file ) {
           setSelectedFile(file);
         } else {
           alert("Please select a valid image file (JPEG, PNG, or GIF).");
         }
        };
     
-      const isImageFile = (file) => {
-        const acceptedTypes = ["image/jpeg", "image/png", "image/gif"];
-        return acceptedTypes.includes(file.type);
-      };
+      // const isImageFile = (file) => {
+      //   const acceptedTypes = ["image/jpeg", "image/png", "image/gif"];
+      //   return acceptedTypes.includes(file.type);
+      // };
       
      // firebase
     async function addProduct (e) {
         e.preventDefault();
-        
-        // if (!selectedFile) {
-        //     alert("Please select a valid image file (JPEG, PNG, or GIF).");
-        //     return;
-        //   }
-
+        if (!selectedFile) {
+            alert("Please select a valid image file (JPEG, PNG, or GIF).");
+            return;
+          }
         try {
             const fileRef = ref(storage, `${v4()}`);
             await uploadBytes(fileRef, selectedFile);
             const fileURL = await getDownloadURL(fileRef);
-            const productWithFile = { ...product, photoURL: fileURL };
+           // console.log(fileRef);
+            const product = { ...newProduct, image: fileURL };
                 await axios
-                    .post("http://localhost:8080/products/create", productWithFile, {headers:{Authorization:`Bearer ${token}`}})
-                    // .then((res) => {
-                    //     alert(res.data.msg);
-                    await readProducts();
-                    navigate("/");
-                   // })
+                    .post("http://localhost:8080/products/create", product, {headers:{Authorization:`Bearer ${token}`}});
+                  //   setProduct({
+                  //     title:"",
+                  //     description:"",
+                  //     image:"",
+                  //     status:"",
+                  //     category: "",
+                  // })
+                  // // .then(() => readProducts());
+                  //   .then((res) => {
+                  //       alert(res.data.msg);
+                  await  readProducts();
+                  navigate("/");
+                    // })
         } catch (err) {
             console.log(err);
         }
     }
+
     return (
     <div>
     <div className="formContainer">
-        <form className="form">
+        <form className="form" onSubmit={(e) => {addProduct (e);}}>
           <h2>The product you wish to exchange</h2>
         <label><br/>
         <input type="text" name="title" onChange={handleInputChange} value={product.title} placeholder="Title"/><br/>
@@ -113,14 +133,12 @@ function Form({ readProducts }) {
         <br/>
         
         <label className="custom-file-upload"> Click to add an Image
-        <input type="file" onChange={() => handleFileChange()}/>  
-        {/* <input type="text" name="image" onChange={handleFileChange}  placeholder="image"/><br/> */}
+        <input type="file" onChange={handleFileChange} accept="image/jpeg, image/png, image/gif"/>
+        {/* <input type="text" name="image" onChange={handleFileChange} placeholder="image"/><br/> */}
         </label>
         
-
-
         <br/>
-        <button className="submitBtn" type="submit" onClick={(e) => {addProduct(e); handleFileChange(e);}}>Submit</button>
+        <button className="submitBtn" type="submit" onClick={addProduct}>Submit</button>
 
     </form>
     </div>
