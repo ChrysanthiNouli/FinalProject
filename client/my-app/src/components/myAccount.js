@@ -7,8 +7,8 @@ const Account = () => {
         <div className="accountBackground">
             <table className="linkList">
             <th><h2 className="accountTitle">My account</h2></th>
-            <tr><Link className="accountLink" to="/form">Add a product to exchange</Link></tr>
-            <tr><Link className="accountLink" to="/orders">My Orders</Link></tr>
+            <tr className="tr"><Link className="accountLink" to="/form">Add a product to exchange</Link></tr>
+            <tr className="tr"><Link className="accountLink" to="/orders">My Orders</Link></tr>
             </table>
         </div>
     )

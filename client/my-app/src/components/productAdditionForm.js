@@ -58,10 +58,10 @@ function Form({ readProducts }) {
     async function addProduct (e) {
         e.preventDefault();
         
-        if (!selectedFile) {
-            alert("Please select a valid image file (JPEG, PNG, or GIF).");
-            return;
-          }
+        // if (!selectedFile) {
+        //     alert("Please select a valid image file (JPEG, PNG, or GIF).");
+        //     return;
+        //   }
 
         try {
             const fileRef = ref(storage, `${v4()}`);

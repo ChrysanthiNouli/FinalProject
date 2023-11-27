@@ -1,9 +1,11 @@
 import Cart from "../components/cart.js";
+import Product from "../components/product.js";
 
-function CartProductList ({ cart,  }) {
+function CartProductList ({ cartItems, readCartItems }) {
     return (
         <div>
-            <Cart Cart={Cart} />
+            <Cart cartItems={cartItems} readCartItems={readCartItems}/>
+            {/* <Product products={products} readProducts={readProducts}/> */}
         </div>
     )
 }

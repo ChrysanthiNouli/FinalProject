@@ -1,46 +1,79 @@
-import React from "react";
+import { React, useEffect, useState }from "react";
+import Product from "../components/product.js";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+import "../components/cart.css";
  
-const Cart = (functionalities) => {
-  const { cartItems, addToCart, removeFromCart } = functionalities;
+const Cart = ({ addToCart, readCartItems }) => {
+ let [cartItems, setCartItems] = useState([]);
+ let token = localStorage.getItem("token");
+  //let productId = cart;
   const shippingPrice = 0;
+
+   readCartItems = () => {
+    try {
+      axios
+      .get("http://localhost:8080/cart", {headers:{Authorization:`Bearer ${token}`}})
+      .then((res) => setCartItems(res.data))
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    readCartItems();
+  }, []);
+
+  async function removeFromCart(productId) {
+    if (window.confirm("Do you want to remove this product from your cart?")) {
+      try {
+          let res = await axios
+          .delete(`http://localhost:8080/cart/${productId}`, {headers:{Authorization:`Bearer ${token}`}});
+          alert(res.data.msg);
+          readCartItems();
+      } catch(err) {
+          console.log("Cannot remove product from cart, ", err);
+      }
+    } else {
+      return;
+    }
+  }
   return (
-    <>
-      <h2>Cart Items</h2>
-      <div>
-        {cartItems.length === 0 && <div>Cart is empty</div>}
-        {cartItems.map((item) => (
-          <div className="row">
-            <div className="col-2">{item}</div>
-            <div className="col-2">
-              <button onClick={() => removeFromCart(item)} className="remove">
-                -
+    <div className="cartProductContainer">
+      <table className="cartProductTable">
+      <h2 className="myCart">My Cart</h2>
+        {/* {cartItems.length === 0 && <div>Cart is empty</div>} */}
+        {cartItems.map((cartItem) => (
+          <tr className="cartProductCard" key={cartItem._id}>
+            <tr className="cartProductCard">{cartItem._id}</tr>
+              <button className="removeBtn" onClick={() => removeFromCart(cartItem)}>
+                X
               </button>{' '}
-              <button onClick={() => addToCart(item)} className="add">
+              {/* <button onClick={() => addToCart(item)} className="add">
                 +
-              </button>
-            </div>
-          </div>
+              </button> */}
+            </tr>
         ))}
 
         {cartItems.length !== 0 && (
           <>
             <hr></hr>
-            <div className="row">
+            <div className="shipping">
               <div className="col-2">Shipping Price</div>
               <div className="col-1 text-right">
                 ${shippingPrice.toFixed(2)}
               </div>
             </div>
             <hr />
-            <div className="row">
-              <button onClick={() => alert("Let's Checkout!")}>
+            <div className="checkoutContainer" >
+              <button className="checkout" onClick={() => alert("Let's Checkout!")}>
                 Checkout
               </button>
             </div>
           </>
         )}
-      </div>
-    </>
+      </table>
+    </div>
   );
 }
 

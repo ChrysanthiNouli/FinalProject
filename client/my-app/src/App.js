@@ -14,7 +14,7 @@ import Account from "./components/myAccount.js";
 import Product from "./components/product.js";
 import Footer from "./components/footer.js";
 import About from "./components/about.js";
-import addToCart from "./components/product.js";
+//import addToCart from "./components/product.js";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -42,7 +42,7 @@ function App() {
       <NavbarFunction/>
       <Routes>
         <Route path="/form" element={<Form readProducts={readProducts}/>}>Product Form</Route>
-        <Route path="/" element={<ProductList products={products} cartItems={cartItems} addToCart={addToCart} readProducts={readProducts}/>}>exCHANGE</Route>
+        <Route path="/" element={<ProductList products={products} cartItems={cartItems}/>}>exCHANGE</Route>
         <Route path="/register" element={<Register register={Register}/>}>Register</Route>
         <Route path="/login" element={<Login Login={Login}/>}>Log In</Route>
         <Route path="/wishlist" element={<Like Like={Like}/>}/>
@@ -59,5 +59,3 @@ function App() {
 }
 
 export default App;
-
-//   const { products } = data;

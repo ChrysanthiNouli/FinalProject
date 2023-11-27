@@ -6,7 +6,7 @@ import { Cart } from "../components/cart.js"
 import "../components/product.css";
 //import { Firebase } from "../components/firebaseImages.js";
 
-function Product({ products, readProducts, addToCart, removeFromCart}) {
+function Product({ products, readProducts, addToCart, removeFromCart }) {
     const [productCreatorIds, setProductCreatorIds] = useState([]); 
     const [cartItems, setCartItems] = useState([]);
   
@@ -120,15 +120,36 @@ function Product({ products, readProducts, addToCart, removeFromCart}) {
         }
     } else {
       return;
-    };
+    }
+  }
 
+  // const readProducts = () => {
+  //   try {
+  //     axios
+  //     .get("http://localhost:8080/products")
+  //     .then((res) => setProducts(res.data))
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-   const addToCart = async function addToCart() {
+  const readCartItems = () => {
+    try {
+      axios
+      .get("http://localhost:8080/cart")
+      .then((res) => setCartItems(res.data))
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+   async function addToCart(e) {
+     
       try {
         await axios
-        .post("http://localhost:8000/cart/add", cartItems);
-        setCartItems({})
-        .then(() => readProducts());
+        .post("http://localhost:8080/cart/add", cartItems, {headers:{Authorization:`Bearer ${token}`}});
+        setCartItems([{productId: ""}])
+        // await readProducts();
       } catch (err) {
         console.log("Cannot add product to cart, ", err);
       }};
@@ -138,7 +159,7 @@ function Product({ products, readProducts, addToCart, removeFromCart}) {
     if (window.confirm("Do you want to remove this product from your cart?")) {
       try {
           let res = await axios
-          .delete(`http://localhost:8080/cart/${id}`);
+          .delete(`http://localhost:8080/cart/${id}`, {headers:{Authorization:`Bearer ${token}`}});
           alert(res.data.msg);
           readProducts();
       } catch(err) {
@@ -149,12 +170,12 @@ function Product({ products, readProducts, addToCart, removeFromCart}) {
     }
   }
     
-  }
+  
     return (
-        <div class="productContainer">
+        <div className="productContainer">
             {products.map((product) => (
-               <div key={product._id} class="col">
-               <div class="productCard">
+               <div key={product._id} className="col">
+               <div className="productCard">
                  <span className="image">{/*{<img src={url}/>} */}</span><br/>
                  <span className="title">{product.title}</span>
                  <span className="description">{product.description}</span>
@@ -162,7 +183,7 @@ function Product({ products, readProducts, addToCart, removeFromCart}) {
                  {/* <span>{product.category}</span> */}
                  {/* <span>{product.creator.username}</span> */}
                  <div className="btnContainer">
-                  <button className="formBtn" onClick={(e) => {addToCart(e)}}>Add <FaShoppingCart /></button>
+                  <button className="formBtn" onClick={()=> {addToCart(); console.log("added")}}>Add <FaShoppingCart /></button>
                   {token && productCreatorIds.includes(product._id) ? (  <>
                   <button className="formBtn" onClick={() => deleteProduct(product._id)}><FaRegTrashAlt /></button>
                   <button className="formBtn" onClick={() => setEditProduct({id: product._id})}><FaEdit /></button>

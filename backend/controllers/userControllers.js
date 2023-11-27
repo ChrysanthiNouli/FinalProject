@@ -39,7 +39,7 @@ const login = async (req, res) => {
                     process.env.PRIVATE_KEY, 
                     {expiresIn : "2h"}
                 );
-                res.status(200).send({msg:"Welcome!", token});
+                res.status(200).send({msg:"Welcome "+ `${existingUser.username}`, token});
             } 
         } else {
             return res.status(404).send({msg: "Invalid email or password. User not found."});

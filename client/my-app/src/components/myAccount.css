@@ -2,13 +2,14 @@
     background-image: url(../components/sus.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 450px;
+    height: 500px;
     display: flex;
     justify-content: center;
 }
 
 .accountTitle {
-
+    color: #243733;
+    margin: 15px;
 }
 
 .linkList {
@@ -17,20 +18,22 @@
     box-shadow: 20px 20px 80px #243733;
     border-radius: 5px;
     width: 40%;
-    height: 200px;
+    height: 170px;
     opacity: 95%;
     color: white;
-    margin: 100px;
+    margin: 150px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
-tr {
-   width: 100%; 
-}
-
-tr:hover {
-    background-color: #243733;
-    color:#DFECE3;
-}
+.tr {
+   width: 90%; 
+   border: 1px solid transparent;
+   border-radius: 3px;
+   
+   padding: 10px;
+ }
 
 .accountLink {
     cursor: pointer;  
@@ -43,5 +46,5 @@ tr:hover {
 }
 
 .accountLink:hover {
-    color:#DFECE3;
+    color: #AF9842;
 }
