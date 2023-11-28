@@ -83,7 +83,7 @@ function Product({ products, readProducts, addToCart, removeFromCart }) {
         }
     }
 
-    async function updateProduct(id) {
+    async function updateProduct() {
         try {
             await axios
             .put(`http://localhost:8080/${editProduct.id}`, {
@@ -94,13 +94,12 @@ function Product({ products, readProducts, addToCart, removeFromCart }) {
                 category: editProduct.category,
             });
             setEditProduct({
-                id: id,
                 title:"",
                 description:"",
                 image:"",
                 status:"",
                 category: "",
-            })
+            });
             readProducts();
         } catch(err) {
             console.log("Cannot update product, ", err);
@@ -196,32 +195,35 @@ function Product({ products, readProducts, addToCart, removeFromCart }) {
                {/* editing form */}
                {editProduct.id === product._id && (
                  <div>
-                   <input
+                   <input className="editForm"
                      type="text"
-                     value={product.title}
+                     value={editProduct.title}
+                     placeholder={product.title}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, title: e.target.value })
                      }
                    />
-                   <input
+                   <input className="editForm"
                      type="text"
-                     value={product.description}
+                     value={editProduct.description}
+                     placeholder={product.description}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, description: e.target.value })
                      }
                    />
-                   {/* <input
+                   <input className="editForm"
                      type="text"
-                     value={product.image}
+                     value={editProduct.image}
+                     placeholder={product.image}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, image: e.target.value })
                      }
-                   /> */} 
-                   {/* firebase here */}
+                   />
                     
-                    <select
+                    <select className="editForm"
                      name="status"
-                     value={product.status}
+                     value={editProduct.status}
+                     placeholder={product.status}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, status: e.target.value })
                      }>
@@ -229,17 +231,18 @@ function Product({ products, readProducts, addToCart, removeFromCart }) {
                       <option value="used">Used</option> 
                    </select>
 
-                   <select
+                   <select className="editForm"
                      name="category"
-                     value={product.category}
+                     value={editProduct.category}
+                     placeholder={product.category}
                      onChange={(e) =>
                        setEditProduct({ ...editProduct, category: e.target.value })
                      }>
                      {categoryOptions.map(options => <option value={options.value}>{options.label}</option>)}
                    </select>
 
-                   <button onClick={updateProduct}>Save</button>
-                   <button onClick={handleCancel}>Cancel</button>
+                   <button className="editBtn" onClick={updateProduct}>Save</button>
+                   <button className="editBtn" onClick={handleCancel}>Cancel</button>
                  </div>
                )}
              </div> 

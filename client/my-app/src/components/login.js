@@ -43,6 +43,7 @@ return (
                 <label htmlFor="password"></label><br/>
                 <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/><br/>
                 <input type="submit" value="Log in"/>
+                <a className="LoginLinkToRegister" href="/register">Create an account</a>
         </form>
     </div>
     )

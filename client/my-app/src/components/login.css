@@ -57,3 +57,14 @@ input[type=email]:focus,
 input[type=password]:focus {
    outline: 2px solid #7DA063;
 }
+
+
+.LoginLinkToRegister {
+    padding: 25px;
+    color: #243733;
+    align-items: right;
+}
+
+.LoginLinkToRegister:visited {
+    color: #243733;
+}

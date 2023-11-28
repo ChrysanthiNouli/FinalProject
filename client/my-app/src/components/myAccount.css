@@ -2,9 +2,9 @@
     background-image: url(../components/sus.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;
     display: flex;
     justify-content: center;
+    min-height: 85vh;
 }
 
 .accountTitle {

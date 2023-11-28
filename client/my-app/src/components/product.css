@@ -50,20 +50,39 @@ img {
 
 .title {
     font-size: 18px;
-    margin-bottom: 8px;
+    padding-bottom: 8px;
+    padding-left: 5px;
 }
 
 .description {
     font-size: 15px;
-    margin-bottom: 5px;
+    padding-bottom: 8px;
+    padding-left: 5px;
 }
 
 .productStatus {
     font-size: 12px;
-    margin-bottom: 5px;
+    padding-bottom: 8px;
+    padding-left: 5px;
 }
 
 .btnContainer {
     display: flex;
     justify-content: center;
+}
+
+.editBtn {
+    border: 2px solid transparent;
+    border-radius: 3px;
+    color: #DFECE3;
+    background-color:#243733;
+    padding: 5px;
+    cursor:pointer;
+    margin-bottom: 0px;
+    margin-right: 5px;
+}
+
+.editForm {
+    border-bottom: 1px solid black;
+    margin: 5px;
 }

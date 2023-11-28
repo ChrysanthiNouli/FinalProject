@@ -5,7 +5,8 @@ export const Box = styled.div`
     background: #A15949;
     bottom: 0;
     width: 98%;
-    //position: absolute;
+    //position: fixed;
+    //margin-top: auto;
 `;
  
 export const FooterContainer = styled.div`

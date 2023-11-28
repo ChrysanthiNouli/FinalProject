@@ -7,6 +7,7 @@
     align-items: center;
     margin-left: 15%;
     background-color: #DFECE3;
+    min-height: 85vh;
 }
 
 .cartProductCard {
@@ -16,12 +17,14 @@
     display: flex;
     align-content: center;
     width: 100%;
+    
 }
 
 .shipping {
     padding: 5px;
     display: flex;
     justify-content: space-evenly;
+    
 }
 
 .removeBtn {
@@ -64,11 +67,35 @@
 
 .myCart {
     color: #243733;
-    padding: 15px;
+    padding: 28px;
     display: flex;
     justify-content: center;
 }
 
 tr {
     margin: 5px;
+}
+
+.emptyCart {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-content: center;
+    width: 100%;
+    min-height: 85vh;
+}
+
+.cartLink {
+    cursor: pointer;  
+    border: none;
+    text-decoration: none;
+}
+
+.cartLink:visited {
+    color:#243733;
+}
+
+.cartLink:hover {
+    color: #AF9842;
 }

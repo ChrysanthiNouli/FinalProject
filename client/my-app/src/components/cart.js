@@ -1,6 +1,7 @@
 import { React, useEffect, useState }from "react";
 import Product from "../components/product.js";
 import { jwtDecode } from "jwt-decode";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "../components/cart.css";
  
@@ -42,7 +43,7 @@ const Cart = ({ addToCart, readCartItems }) => {
     <div className="cartProductContainer">
       <table className="cartProductTable">
       <h2 className="myCart">My Cart</h2>
-        {/* {cartItems.length === 0 && <div>Cart is empty</div>} */}
+       {cartItems.length === 0 && <div className="emptyCart">There is nothing here<Link className="cartLink" to="/">, continue shopping</Link></div>}
         {cartItems.map((cartItem) => (
           <tr className="cartProductCard" key={cartItem._id}>
             <tr className="cartProductCard">{cartItem._id}</tr>
@@ -61,7 +62,7 @@ const Cart = ({ addToCart, readCartItems }) => {
             <div className="shipping">
               <div className="col-2">Shipping Price</div>
               <div className="col-1 text-right">
-                ${shippingPrice.toFixed(2)}
+              € {shippingPrice.toFixed(2)}
               </div>
             </div>
             <hr />

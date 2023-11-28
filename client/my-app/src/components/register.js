@@ -26,6 +26,7 @@ const Register = () => {
                 <label  htmlFor="password"></label><br/>
                 <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/><br/>
                 <input type="submit" value="Register"/>
+                <a className="registerLinkToLogin" href="/login">Already have an account?</a>
             </form>
         </div>
     )

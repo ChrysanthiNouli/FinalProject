@@ -2,8 +2,6 @@ import {Link, useNavigate} from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { FaBars, FaHeart, FaRegEnvelope, FaShoppingCart, FaUser } from 'react-icons/fa';
 import Navbar from 'react-bootstrap/Nav';
-import Nav from 'react-bootstrap/Nav';
-import Container from 'react-bootstrap/Container';
 import "../navbar.css";
 
 function NavbarFunction() {
@@ -24,7 +22,7 @@ function NavbarFunction() {
         if (token) {
             localStorage.removeItem("token");
             navigate("/login");
-            window.location.reload()
+            window.location.reload();
         } else {
             return;
         }
@@ -36,7 +34,7 @@ function NavbarFunction() {
                 <Navbar className="nav">
                     <div className="linkContainer">
                     <div className="left">
-                            <Link className="Link" to="/menu"><FaBars /> </Link>
+                            {/* <Link className="Link" to="/menu"><FaBars /> </Link> */}
                     </div>
                     <div className="center">
                             <Link className="Link" to="/">exCHANGE </Link>
@@ -51,7 +49,7 @@ function NavbarFunction() {
                         <div className="linkContainer">
 
                         <div className="left">   
-                        <span className="burgerMenu"><Link className="Link" to="/menu"><FaBars /> <img src="./Untitled design.svg"></img></Link></span>
+                        {/* <span className="burgerMenu"><Link className="Link" to="/menu"><FaBars /></Link></span> */}
                         {/* <Link to="/mail"><FaRegEnvelope /></Link> */}
                         </div>
 
